@@ -25,8 +25,8 @@ int main(int argc, char **argv){
 		if (allArgs[i] == "-m") industryIdentification = true; 		// major industry identification option
 		if (allArgs[i] == "-i") issuerIdentification = true; 		// issuer identification option
 		if (allArgs[i] == "-p") personalAccountIdentification = true; 	// personal account identification option
-		if (allArgs[i] == "-a") checkAll = true;			// make all the options true other than input and output file
-		if (allArgs[i] == "-h") helpCalled = true;			// show usage
+		if (allArgs[i] == "-a") checkAll = true;			// all options other than io file names
+		if (allArgs[i] == "-h") helpCalled = true;			// show usage option
 	}
 	if ( helpCalled == true || argc == 1) help();				// show help if it is called or there are no arguaments
 }
