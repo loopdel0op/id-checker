@@ -1,21 +1,18 @@
 // cc-checker main.cpp
 
-#include <iostream>
+#include "functions.h"
+
 #include <vector>
 
-using namespace std;
-
-vector<string> allArgs;
-string inputFileName = "";
-string outputFileName = "";
+std::vector<std::string> allArgs;
+std::string inputFileName = "";
+std::string outputFileName = "";
 bool luhnCheck = NULL;
 bool industryIdentification = NULL;
 bool issuerIdentification = NULL;
 bool personalAccountIdentification = NULL;
 bool checkAll = NULL;
 bool helpCalled = NULL;
-
-void help();
 
 int main(int argc, char **argv){
 
@@ -31,11 +28,5 @@ int main(int argc, char **argv){
 		if (allArgs[i] == "-a") checkAll = true;			// make all the options true other than input and output file
 		if (allArgs[i] == "-h") helpCalled = true;			// show usage
 	}
-
 	if ( helpCalled == true || argc == 1) help();
-}
-
-
-void help(){
-	printf("help");
 }
