@@ -10,7 +10,7 @@ std::string outputFileName = "";
 bool luhnCheck = NULL;
 bool industryIdentification = NULL;
 bool issuerIdentification = NULL;
-bool personalAccountIdentification = NULL;
+bool personalAccountNumber = NULL;
 bool checkAll = NULL;
 bool helpCalled = NULL;
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv){
 		if (allArgs[i] == "-l") luhnCheck = true; 			// luhn algorithm check option
 		if (allArgs[i] == "-m") industryIdentification = true; 		// major industry identification option
 		if (allArgs[i] == "-i") issuerIdentification = true; 		// issuer identification option
-		if (allArgs[i] == "-p") personalAccountIdentification = true; 	// personal account identification option
+		if (allArgs[i] == "-p") personalAccountNumber	= true; 	// personal account number option
 		if (allArgs[i] == "-a") checkAll = true;			// all options other than io file names
 		if (allArgs[i] == "-h") helpCalled = true;			// show usage option
 	}

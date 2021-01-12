@@ -9,7 +9,7 @@ extern std::string outputFileName;
 extern bool luhnCheck;
 extern bool industryIdentification;
 extern bool issuerIdentification;
-extern bool personalAccountIdentification;
+extern bool personalAccountNumber;
 extern bool checkAll;
 extern bool helpCalled;
 
