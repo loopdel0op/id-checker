@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 void help(){
 	printf("id-checker	(https://github.com/loopdel0op/cc-checker)\n"
@@ -17,4 +18,16 @@ void help(){
 		"	-p	personal account number\n"
 		"	-a	check/identifiy all\n");
 }
-
+void readFile(){
+	std::string line;
+	std::ifstream inputFile (inputFileName);
+	while ( getline (inputFile, line) ) cardNumbers.push_back(line);
+	inputFile.close();
+}
+void writeFile(){
+	std::ofstream outputFile;
+	outputFile.open (outputFileName);
+	outputFile.close();
+}
+void luhnCheck(){
+}

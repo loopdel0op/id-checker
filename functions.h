@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+extern std::vector<std::string> cardNumbers;
 extern std::vector<std::string> allArgs;
 extern std::string inputFileName;
 extern std::string outputFileName;
@@ -12,5 +13,9 @@ extern bool issuerIdentification;
 extern bool personalAccountNumber;
 extern bool checkAll;
 extern bool helpCalled;
+extern bool fileOutput;
 
 void help();
+void readFile();
+void writeFile();
+void luhnCheck();
