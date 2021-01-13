@@ -6,7 +6,7 @@
 #include <vector>
 
 void help(){
-	printf("cc-checker	(https://github.com/loopdel0op/cc-checker)\n"
+	printf("id-checker	(https://github.com/loopdel0op/cc-checker)\n"
 		"Usage: cc-checker [Options] {cc numbers}\n"
 		"OPTIONS:\n"
 		"	-f	input file name\n"
