@@ -1,4 +1,4 @@
-// cc-checker functions.h
+// id-checker functions.h
 
 #include <vector>
 #include <string>

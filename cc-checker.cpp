@@ -1,4 +1,4 @@
-// id-checker main.cpp
+// id-checker cc-checker.cpp
 
 #include "functions.h"
 
