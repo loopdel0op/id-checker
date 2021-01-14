@@ -1,8 +1,9 @@
 // id-checker cc-checker.cpp
 
-#include "functions.h"
+#include "cc-checker.h"
 
 #include <vector>
+#include <iostream>
 
 std::vector<std::string> cardNumbers;
 std::vector<std::string> allArgs;
@@ -30,8 +31,9 @@ int main(int argc, char **argv){
 		if (allArgs[i] == "-a") checkAll = true;			
 		if (allArgs[i] == "-h") helpCalled = true;			
 	}
-	if ( helpCalled == true || argc == 1) help();				// show help if it is called or there are no arguaments
-	if ( !inputFileName.empty()) readFile();				// if input file is specified read it and store it in a string vector
-	// process here
-	if (fileOutput) writeFile();						// if output file is specified write output inside of it instead of cli
+	if (helpCalled == true || argc == 1) help();				// show help if it is called or there are no arguaments
+	if (!inputFileName.empty()) readFile();					// if input file is specified read it and store it in a string vector
+
+	if (luhnAlg(allArgs[0]) == true) printf("true");
+
 }

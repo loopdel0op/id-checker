@@ -1,6 +1,6 @@
 // id-checker functions.cpp
 
-#include "functions.h"
+#include "cc-checker.h"
 
 #include <iostream>
 #include <vector>
@@ -29,5 +29,15 @@ void writeFile(){
 	outputFile.open (outputFileName);
 	outputFile.close();
 }
-void luhnCheck(){
+bool luhnAlg(std::string input){
+	int sum = 0;
+	for(int i = 0; i != input.size(); ++i){
+		int digit = input[i] - '0';
+		if (i % 2 == 0)
+			if ((digit = 2*digit) >= 10) 
+				digit -= 9;
+		sum += digit;
+	}
+	if ( sum % 10 == 0) return true;
+	return false;
 }

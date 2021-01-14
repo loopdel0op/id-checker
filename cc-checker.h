@@ -1,4 +1,4 @@
-// id-checker functions.h
+// id-checker cc-checker.h
 
 #include <vector>
 #include <string>
@@ -18,4 +18,5 @@ extern bool fileOutput;
 void help();
 void readFile();
 void writeFile();
-void luhnCheck();
+bool luhnAlg(std::string input);
+void output();
