@@ -16,7 +16,8 @@ void help(){
 		"	-m	major industry identification\n"
 		"	-i	issuer identification\n"
 		"	-p	personal account number\n"
-		"	-a	check/identifiy all\n");
+		"	-a	check/identifiy all\n"
+		"	-n	card number(s)\n");
 }
 void readFile(){
 	std::string line;
@@ -27,6 +28,13 @@ void readFile(){
 void writeFile(){
 	std::ofstream outputFile;
 	outputFile.open (outputFileName);
+	outputFile << "test";
+	for(int i = 0; i != cardNumbers.size(); ++i){
+	outputFile << cardNumbers[i] << std::endl;
+	if(luhnAlg(cardNumbers[i]))
+		outputFile << "\t> Passed luhn algorithm check\n";
+	else	outputFile << "\t> Failed luhn algorithm check\n";
+	}
 	outputFile.close();
 }
 bool luhnAlg(std::string input){
@@ -40,4 +48,14 @@ bool luhnAlg(std::string input){
 	}
 	if ( sum % 10 == 0) return true;
 	return false;
+}
+void output(){
+	if (!fileOutput){	// if there is no output file specified output to cli, else output to the file specified
+		for (int i = 0; i != cardNumbers.size(); ++i){
+			std::cout << cardNumbers[i] << std::endl;
+			if(luhnAlg(cardNumbers[i]))
+				std::cout << "\t> Passed luhn algorithm check\n";
+			else	std::cout << "\t> Failed luhn algorithm check\n";
+		}
+	} else writeFile();
 }
