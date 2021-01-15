@@ -28,7 +28,6 @@ void readFile(){
 void writeFile(){
 	std::ofstream outputFile;
 	outputFile.open (outputFileName);
-	outputFile << "test";
 	for(int i = 0; i != cardNumbers.size(); ++i){
 	outputFile << cardNumbers[i] << std::endl;
 	if(luhnAlg(cardNumbers[i]))

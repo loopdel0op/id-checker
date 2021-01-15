@@ -18,21 +18,24 @@ bool helpCalled = NULL;
 bool fileOutput = NULL;
 
 int main(int argc, char **argv){
-
+	if (argc == 1) help();							// show help if there are no arguaments
 	allArgs.assign (argv + 1, argv + argc ); 				// pour char array to string vector
-
 	for ( int i = 0; i != argc - 1; i++){ 					// cli arguaments 			
 		if (allArgs[i] == "-f" && allArgs.size() == i + 2) inputFileName = allArgs[++i]; 		
-		if (allArgs[i] == "-o") {if (allArgs.size() == i + 2) outputFileName = allArgs[++i]; fileOutput = true;}
-		if (allArgs[i] == "-l") luhnCheck = true; 			
-		if (allArgs[i] == "-m") industryIdentification = true; 		
-		if (allArgs[i] == "-i") issuerIdentification = true; 		
-		if (allArgs[i] == "-p") personalAccountNumber	= true; 	
-		if (allArgs[i] == "-a") checkAll = true;			
-		if (allArgs[i] == "-h") helpCalled = true;
-		if (allArgs[i] == "-n")	for (int n = ++i; n != argc -1; ++n) cardNumbers.push_back(allArgs[n]);	
+		else if (allArgs[i] == "-o") {if (allArgs.size() == i + 2) outputFileName = allArgs[++i]; fileOutput = true;}
+		else if (allArgs[i] == "-l") luhnCheck = true; 			
+		else if (allArgs[i] == "-m") industryIdentification = true; 		
+		else if (allArgs[i] == "-i") issuerIdentification = true; 		
+		else if (allArgs[i] == "-p") personalAccountNumber	= true; 	
+		else if (allArgs[i] == "-a") checkAll = true;			
+		else if (allArgs[i] == "-h") {help(); return 0;}
+		else if (allArgs[i] == "-n"){	
+			for (int n = ++i; n != argc -1; ++n){
+				cardNumbers.push_back(allArgs[n]);
+			}break;
+		}
+		else {help(); return 0;}
 	}
-	if (helpCalled == true || argc == 1) help();				// show help if it is called or there are no arguaments
-	if (!inputFileName.empty()) readFile();					// if input file is specified read it and store it in a string vector
+	if (!inputFileName.empty()) readFile();					// if input file is specified read it and store the contents in a string vector
 	output();
 }
