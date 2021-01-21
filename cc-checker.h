@@ -18,5 +18,7 @@ extern bool fileOutput;
 void help();
 void readFile();
 void writeFile();
-bool luhnAlg(std::string input);
+bool luhnAlg(const std::string& input);
 void output();
+bool isNumber(const std::string& input);
+bool isParameter(const std::string& input);
