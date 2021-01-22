@@ -49,7 +49,7 @@ bool luhnAlg(const std::string& input){
 	return false;
 }
 void output(){			// if there is no output file specified output to cli, else output to the file specified
-	if (!fileOutput){	
+	if (outputFileName.empty()){	
 		for (int i = 0; i != cardNumbers.size(); ++i){
 			std::cout << cardNumbers[i] << std::endl;
 			if(luhnAlg(cardNumbers[i]))
@@ -65,6 +65,5 @@ bool isNumber(const std::string& input){
 }
 bool isParameter(const std::string& input){
 	std::string::const_iterator it = input.begin();
-	while(it != input.end() && *it !='-') ++it;
-	return !input.empty() && it == input.end();
+	return *it == '-' && !input.empty();
 }

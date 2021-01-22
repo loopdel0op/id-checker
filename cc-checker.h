@@ -13,7 +13,6 @@ extern bool issuerIdentification;
 extern bool personalAccountNumberIdentification;
 extern bool checkAll;
 extern bool helpCalled;
-extern bool fileOutput;
 
 void help();
 void readFile();
