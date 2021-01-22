@@ -6,6 +6,8 @@
 #include <vector>
 #include <fstream>
 
+std::string checkMII(const std::string& input);
+
 void help(){
 	printf("id-checker	(https://github.com/loopdel0op/id-checker)\n"
 		"Usage: cc-checker [Options] {cc numbers}\n"
@@ -36,6 +38,27 @@ void writeFile(){
 	}
 	outputFile.close();
 }
+void output(){			// if there is no output file specified output to cli, else output to the file specified
+	if (outputFileName.empty()){	
+		for (int i = 0; i != cardNumbers.size(); ++i){
+			std::cout << cardNumbers[i] << std::endl;
+			if(luhnAlg(cardNumbers[i]))
+				std::cout << "\t> Passed luhn algorithm check\n";
+			else	std::cout << "\t> Failed luhn algorithm check\n";
+			if(industryIdentification)
+				std::cout << "\t> " << checkMII(cardNumbers[i]) << std::endl;
+		}
+	} else writeFile();
+}
+bool isNumber(const std::string& input){
+	std::string::const_iterator it = input.begin();
+	while(it != input.end() && std::isdigit(*it)) ++it;
+	return !input.empty() && it == input.end();
+}
+bool isParameter(const std::string& input){
+	std::string::const_iterator it = input.begin();
+	return *it == '-' && !input.empty();
+}
 bool luhnAlg(const std::string& input){
 	int sum = 0;
 	for(int i = 0; i != input.size(); ++i){
@@ -48,22 +71,29 @@ bool luhnAlg(const std::string& input){
 	if ( sum % 10 == 0) return true;
 	return false;
 }
-void output(){			// if there is no output file specified output to cli, else output to the file specified
-	if (outputFileName.empty()){	
-		for (int i = 0; i != cardNumbers.size(); ++i){
-			std::cout << cardNumbers[i] << std::endl;
-			if(luhnAlg(cardNumbers[i]))
-				std::cout << "\t> Passed luhn algorithm check\n";
-			else	std::cout << "\t> Failed luhn algorithm check\n";
-		}
-	} else writeFile();
-}
-bool isNumber(const std::string& input){
+std::string checkMII(const std::string& input){
 	std::string::const_iterator it = input.begin();
-	while(it != input.end() && std::isdigit(*it)) ++it;
-	return !input.empty() && it == input.end();
-}
-bool isParameter(const std::string& input){
-	std::string::const_iterator it = input.begin();
-	return *it == '-' && !input.empty();
+	switch(*it){
+	case '0':
+			return "ISO/TC 68 and other industry assignments";
+	case '1':
+			return "Airlines";
+	case '2':
+			return "Airlines and other future industry assignments";
+	case '3':
+			return "Travel and entertainment and banking/financial";
+	case '4':
+			return "Banking and financial";
+	case '5':
+			return "Banking and financial";
+	case '6':
+			return "Merchandising and banking/financial";
+	case '7':
+			return "Petroleum and other future industry assignments";
+	case '8':
+			return "Healthcare, telecommunications and other future industry assignments";
+	case '9':
+			return "National assignment";
+	} 
+	return "";
 }
