@@ -22,8 +22,8 @@ int main(int argc, char **argv){
 	if (argc == 1) help();							// show help if there are no arguaments
 	allArgs.assign (argv + 1, argv + argc ); 				// pour char array to string vector
 	for ( int i = 0; i != argc - 1; i++){ 					// cli arguaments 			
-		if (allArgs[i] == "-f") if (!allArgs[++i].empty() && !isParameter(allArgs[i])) inputFileName = allArgs[i];
-		if (allArgs[i] == "-o") if (!allArgs[++i].empty() && !isParameter(allArgs[i])) outputFileName = allArgs[i];
+		if (allArgs[i] == "-f") if (!allArgs[++i].empty() && !isParameter(allArgs[i])) inputFileName = allArgs[i]; else {help(); return 0;}
+		if (allArgs[i] == "-o") if (!allArgs[++i].empty() && !isParameter(allArgs[i])) outputFileName = allArgs[i]; else {help(); return 0;}
 		if (allArgs[i] == "-l") luhnCheck = true; 			
 		if (allArgs[i] == "-m") industryIdentification = true; 		
 		if (allArgs[i] == "-i") issuerIdentification = true; 		
@@ -33,7 +33,7 @@ int main(int argc, char **argv){
 		if (allArgs[i] == "-n"){	
 			for (int n = ++i; n != argc -1; ++n){			//pour all the numbers to string vector until a non-digit string
 				if(isNumber(allArgs[n]) == false) break;
-				cardNumbers.push_back(allArgs[n]);
+					cardNumbers.push_back(allArgs[n]);
 			}
 		}
 	}
