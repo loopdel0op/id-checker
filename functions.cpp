@@ -5,7 +5,6 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <cstring>
 
 std::string checkMII(const std::string& input);
 std::string luhnAlg(const std::string& input);
