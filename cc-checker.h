@@ -11,13 +11,9 @@ extern bool luhnCheck;
 extern bool industryIdentification;
 extern bool issuerIdentification;
 extern bool personalAccountNumberIdentification;
-extern bool checkAll;
-extern bool helpCalled;
 
 void help();
 void readFile();
-void writeFile();
-bool luhnAlg(const std::string& input);
-void output();
 bool isNumber(const std::string& input);
 bool isParameter(const std::string& input);
+void output();

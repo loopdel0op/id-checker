@@ -5,12 +5,15 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <cstring>
 
 std::string checkMII(const std::string& input);
+std::string luhnAlg(const std::string& input);
+std::string issuerId(const std::string& input);
 
 void help(){
 	printf("id-checker	(https://github.com/loopdel0op/id-checker)\n"
-		"Usage: cc-checker [Options] {cc numbers}\n"
+		"Usage: cc-checker [Options]\n"
 		"OPTIONS:\n"
 		"	-f	input file name\n"
 		"	-o	output file name\n"
@@ -18,12 +21,14 @@ void help(){
 		"	-m	major industry identification\n"
 		"	-i	issuer identification\n"
 		"	-p	personal account number\n"
-		"	-a	check/identifiy all\n"
+		"	-a	check/identify all\n"
 		"	-n	card number(s)\n");
 }
 void readFile(){
 	std::string line;
 	std::ifstream inputFile (inputFileName);
+	if(!inputFile.is_open())
+		help();
 	while ( getline (inputFile, line) ) cardNumbers.push_back(line);
 	inputFile.close();
 }
@@ -32,9 +37,12 @@ void writeFile(){
 	outputFile.open (outputFileName);
 	for(int i = 0; i != cardNumbers.size(); ++i){
 	outputFile << cardNumbers[i] << std::endl;
-	if(luhnAlg(cardNumbers[i]))
-		outputFile << "\t> Passed luhn algorithm check\n";
-	else	outputFile << "\t> Failed luhn algorithm check\n";
+	if(luhnCheck)
+		outputFile << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
+	if(issuerIdentification)
+		outputFile << "\t> " << issuerId(cardNumbers[i]) << std::endl;
+	if(industryIdentification)
+		outputFile << "\t> " << checkMII(cardNumbers[i]) << std::endl;
 	}
 	outputFile.close();
 }
@@ -42,9 +50,10 @@ void output(){			// if there is no output file specified output to cli, else out
 	if (outputFileName.empty()){	
 		for (int i = 0; i != cardNumbers.size(); ++i){
 			std::cout << cardNumbers[i] << std::endl;
-			if(luhnAlg(cardNumbers[i]))
-				std::cout << "\t> Passed luhn algorithm check\n";
-			else	std::cout << "\t> Failed luhn algorithm check\n";
+			if(luhnCheck)
+				std::cout << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
+			if(issuerIdentification)
+				std::cout << "\t> " << issuerId(cardNumbers[i]) << std::endl;
 			if(industryIdentification)
 				std::cout << "\t> " << checkMII(cardNumbers[i]) << std::endl;
 		}
@@ -59,7 +68,7 @@ bool isParameter(const std::string& input){
 	std::string::const_iterator it = input.begin();
 	return *it == '-' && !input.empty();
 }
-bool luhnAlg(const std::string& input){
+std::string luhnAlg(const std::string& input){
 	int sum = 0;
 	for(int i = 0; i != input.size(); ++i){
 		int digit = input[i] - '0';
@@ -68,8 +77,10 @@ bool luhnAlg(const std::string& input){
 				digit -= 9;
 		sum += digit;
 	}
-	if ( sum % 10 == 0) return true;
-	return false;
+	if ( sum % 10 == 0)
+		return "Passed luhn algorithm check";
+	else
+		return "Failed luhn algorithm check";
 }
 std::string checkMII(const std::string& input){
 	std::string::const_iterator it = input.begin();
@@ -96,4 +107,30 @@ std::string checkMII(const std::string& input){
 			return "National assignment";
 	} 
 	return "";
+}
+std::string issuerId(const std::string& input){
+	std::string::const_iterator it = input.begin();
+	std::string digits;
+
+	for(int i = 0; i != 4; ++i){
+		digits.push_back(*it);
+		++it;
+	}	
+	if(digits[0] == '4')
+		return "Visa";
+	if(digits[0] == '3' && digits[1] == '1')
+		return "China T-Union";
+       	if(digits[0] == '6' && digits[1] == '2')
+	   return "China UnionPay";	
+	if(digits[0] == '3' && digits[1] == '4' || digits[0] == '3' && digits[1] == '7')
+	   return "American Express";
+	if(digits[0] == '3' && digits[1] == '6')
+	   return "Diners Club International";
+	if(digits[0] == '5' && (digits[1] == '1' || digits[1] == '2' || digits[1] == '3' || digits[1] == '4' || digits[1] == '5' ))
+		return "Mastercard";
+	if(digits == "6011" || (digits[0] == '6' && digits[1] == '5'))
+		return "Discover";
+	if(digits[0] == '3' && digits[1] == '5')
+		return "JCB";
+	return "Couldn't identify issuer";
 }

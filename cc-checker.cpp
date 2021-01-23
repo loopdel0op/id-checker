@@ -37,6 +37,12 @@ int main(int argc, char **argv){
 			}
 		}
 	}
+	if(checkAll){
+		luhnCheck = true;
+		industryIdentification = true;
+		issuerIdentification = true;
+		personalAccountNumber = true;
+	}
 	if (!inputFileName.empty()) readFile();					// if input file is specified read it and store the contents in a string vector
 	output();
 }
