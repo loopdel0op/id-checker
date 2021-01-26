@@ -11,6 +11,7 @@ extern bool luhnCheck;
 extern bool industryIdentification;
 extern bool issuerIdentification;
 extern bool personalAccountNumberIdentification;
+extern bool issuingBankIdentification;
 
 void help();
 void readFile();

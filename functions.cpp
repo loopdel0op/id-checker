@@ -10,6 +10,7 @@ std::string checkMII(const std::string& input);
 std::string luhnAlg(const std::string& input);
 std::string issuerId(const std::string& input);
 std::string accNumber(const std::string& input);
+std::string bankBIN(const std::string& input);
 
 void help(){
 	printf("id-checker	(https://github.com/loopdel0op/id-checker)\n"
@@ -21,6 +22,7 @@ void help(){
 		"	-m	major industry identification\n"
 		"	-i	issuer identification\n"
 		"	-p	personal account number\n"
+		"	-b	issuing bank\n"
 		"	-a	check/identify all\n"
 		"	-n	card number(s)\n");
 }
@@ -43,6 +45,8 @@ void writeFile(){
 			outputFile << "\t> " << issuerId(cardNumbers[i]) << std::endl;
 		if(industryIdentification)
 			outputFile << "\t> " << checkMII(cardNumbers[i]) << std::endl;
+		if(personalAccountNumberIdentification)
+			outputFile << "\t> Personal account number is " << accNumber(cardNumbers[i]) << std::endl;
 	}
 	outputFile.close();
 }
@@ -58,6 +62,8 @@ void output(){			// if there is no output file specified output to cli, else out
 				std::cout << "\t> " << checkMII(cardNumbers[i]) << std::endl;
 			if(personalAccountNumberIdentification)
 				std::cout << "\t> Personal account number is " << accNumber(cardNumbers[i]) << std::endl;
+			if(personalAccountNumberIdentification)
+				std::cout << "\t> BIN number is " << bankBIN(cardNumbers[i]) << std::endl;
 		}
 	} else writeFile();
 }
@@ -139,6 +145,12 @@ std::string issuerId(const std::string& input){
 std::string accNumber(const std::string& input){
 	std::string result;
 	for(auto it=input.begin()+6; it != input.end() -1; ++it)
+		result.push_back(*it);
+	return result;
+}
+std::string bankBIN(const std::string& input){
+	std::string result;
+	for(auto it=input.begin(); it !=input.begin()+6;++it)
 		result.push_back(*it);
 	return result;
 }

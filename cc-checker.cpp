@@ -14,6 +14,7 @@ bool luhnCheck = NULL;
 bool industryIdentification = NULL;
 bool issuerIdentification = NULL;
 bool personalAccountNumberIdentification = NULL;
+bool issuingBankIdentification;
 bool checkAll = NULL;
 bool helpCalled = NULL;
 
@@ -27,7 +28,8 @@ int main(int argc, char **argv){
 		if (allArgs[i] == "-l") luhnCheck = true; 			
 		if (allArgs[i] == "-m") industryIdentification = true; 		
 		if (allArgs[i] == "-i") issuerIdentification = true; 		
-		if (allArgs[i] == "-p") personalAccountNumberIdentification = true; 	
+		if (allArgs[i] == "-p") personalAccountNumberIdentification = true;
+		if (allArgs[i] == "-b") issuingBankIdentification = true;	
 		if (allArgs[i] == "-a") checkAll = true;			
 		if (allArgs[i] == "-h") {help(); return 0;}
 		if (allArgs[i] == "-n"){	
@@ -42,6 +44,7 @@ int main(int argc, char **argv){
 		industryIdentification = true;
 		issuerIdentification = true;
 		personalAccountNumberIdentification = true;
+		issuingBankIdentification = true;
 	}
 	if (!inputFileName.empty()) readFile();					// if input file is specified read it and store the contents in a string vector
 	output();
