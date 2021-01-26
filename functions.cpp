@@ -9,6 +9,7 @@
 std::string checkMII(const std::string& input);
 std::string luhnAlg(const std::string& input);
 std::string issuerId(const std::string& input);
+std::string accNumber(const std::string& input);
 
 void help(){
 	printf("id-checker	(https://github.com/loopdel0op/id-checker)\n"
@@ -35,13 +36,13 @@ void writeFile(){
 	std::ofstream outputFile;
 	outputFile.open (outputFileName);
 	for(int i = 0; i != cardNumbers.size(); ++i){
-	outputFile << cardNumbers[i] << std::endl;
-	if(luhnCheck)
-		outputFile << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
-	if(issuerIdentification)
-		outputFile << "\t> " << issuerId(cardNumbers[i]) << std::endl;
-	if(industryIdentification)
-		outputFile << "\t> " << checkMII(cardNumbers[i]) << std::endl;
+		outputFile << cardNumbers[i] << std::endl;
+		if(luhnCheck)
+			outputFile << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
+		if(issuerIdentification)
+			outputFile << "\t> " << issuerId(cardNumbers[i]) << std::endl;
+		if(industryIdentification)
+			outputFile << "\t> " << checkMII(cardNumbers[i]) << std::endl;
 	}
 	outputFile.close();
 }
@@ -55,6 +56,8 @@ void output(){			// if there is no output file specified output to cli, else out
 				std::cout << "\t> " << issuerId(cardNumbers[i]) << std::endl;
 			if(industryIdentification)
 				std::cout << "\t> " << checkMII(cardNumbers[i]) << std::endl;
+			if(personalAccountNumberIdentification)
+				std::cout << "\t> Personal account number is " << accNumber(cardNumbers[i]) << std::endl;
 		}
 	} else writeFile();
 }
@@ -132,4 +135,10 @@ std::string issuerId(const std::string& input){
 	if(digits[0] == '3' && digits[1] == '5')
 		return "JCB";
 	return "Couldn't identify issuer";
+}
+std::string accNumber(const std::string& input){
+	std::string result;
+	for(auto it=input.begin()+6; it != input.end() -1; ++it)
+		result.push_back(*it);
+	return result;
 }
