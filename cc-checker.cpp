@@ -34,8 +34,9 @@ int main(int argc, char **argv){
 		if (allArgs[i] == "-h") {help(); return 0;}
 		if (allArgs[i] == "-n"){	
 			for (int n = ++i; n != argc -1; ++n){			//pour all the numbers to string vector until a non-digit string
-				if(isNumber(allArgs[n]) == false) break;
-					cardNumbers.push_back(allArgs[n]);
+				if(!isNumber(allArgs[n]) && !isParameter(allArgs[n])){help(); return 0;}
+				if(!isNumber(allArgs[n]) && isParameter(allArgs[n])) break;
+				cardNumbers.push_back(allArgs[n]);
 			}
 		}
 	}

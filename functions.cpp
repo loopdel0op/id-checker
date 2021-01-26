@@ -39,14 +39,19 @@ void writeFile(){
 	outputFile.open (outputFileName);
 	for(int i = 0; i != cardNumbers.size(); ++i){
 		outputFile << cardNumbers[i] << std::endl;
-		if(luhnCheck)
-			outputFile << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
-		if(issuerIdentification)
-			outputFile << "\t> " << issuerId(cardNumbers[i]) << std::endl;
-		if(industryIdentification)
-			outputFile << "\t> " << checkMII(cardNumbers[i]) << std::endl;
-		if(personalAccountNumberIdentification)
-			outputFile << "\t> Personal account number is " << accNumber(cardNumbers[i]) << std::endl;
+		if(cardNumbers[i].size() >= 13){
+			if(luhnCheck)
+				outputFile << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
+			if(issuerIdentification)
+				outputFile << "\t> " << issuerId(cardNumbers[i]) << std::endl;
+			if(industryIdentification)
+				outputFile << "\t> " << checkMII(cardNumbers[i]) << std::endl;
+			if(personalAccountNumberIdentification)
+				outputFile << "\t> Personal account number is " << accNumber(cardNumbers[i]) << std::endl;
+			if(issuingBankIdentification)
+				outputFile << "\t> BIN number is " << bankBIN(cardNumbers[i]) << std::endl;
+		}else
+				outputFile << "\t> lower than 13 digits hence not a card number" << std::endl;
 	}
 	outputFile.close();
 }
@@ -54,16 +59,19 @@ void output(){			// if there is no output file specified output to cli, else out
 	if (outputFileName.empty()){	
 		for (int i = 0; i != cardNumbers.size(); ++i){
 			std::cout << cardNumbers[i] << std::endl;
-			if(luhnCheck)
-				std::cout << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
-			if(issuerIdentification)
-				std::cout << "\t> " << issuerId(cardNumbers[i]) << std::endl;
-			if(industryIdentification)
-				std::cout << "\t> " << checkMII(cardNumbers[i]) << std::endl;
-			if(personalAccountNumberIdentification)
-				std::cout << "\t> Personal account number is " << accNumber(cardNumbers[i]) << std::endl;
-			if(personalAccountNumberIdentification)
-				std::cout << "\t> BIN number is " << bankBIN(cardNumbers[i]) << std::endl;
+			if(cardNumbers[i].size() >= 13){
+				if(luhnCheck)
+					std::cout << "\t> " << luhnAlg(cardNumbers[i]) << std::endl;
+				if(issuerIdentification)
+					std::cout << "\t> " << issuerId(cardNumbers[i]) << std::endl;
+				if(industryIdentification)
+					std::cout << "\t> " << checkMII(cardNumbers[i]) << std::endl;
+				if(personalAccountNumberIdentification)
+					std::cout << "\t> Personal account number is " << accNumber(cardNumbers[i]) << std::endl;
+				if(issuingBankIdentification)
+					std::cout << "\t> BIN number is " << bankBIN(cardNumbers[i]) << std::endl;
+			}else
+				std::cout << "\t> lower than 13 digits hence not a card number" << std::endl;
 		}
 	} else writeFile();
 }

@@ -15,6 +15,6 @@ extern bool issuingBankIdentification;
 
 void help();
 void readFile();
+void output();
 bool isNumber(const std::string& input);
 bool isParameter(const std::string& input);
-void output();
