@@ -10,13 +10,13 @@ std::vector<std::string> cardNumbers;
 std::vector<std::string> allArgs;
 std::string inputFileName;
 std::string outputFileName;
-bool luhnCheck = NULL;
-bool industryIdentification = NULL;
-bool issuerIdentification = NULL;
-bool personalAccountNumberIdentification = NULL;
+bool luhnCheck = false;
+bool industryIdentification = false;
+bool issuerIdentification = false;
+bool personalAccountNumberIdentification = false;
 bool issuingBankIdentification;
-bool checkAll = NULL;
-bool helpCalled = NULL;
+bool checkAll = false;
+bool helpCalled = false;
 
 
 int main(int argc, char **argv){

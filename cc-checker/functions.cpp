@@ -56,6 +56,7 @@ void writeFile(){
 	outputFile.close();
 }
 void output(){			// if there is no output file specified output to cli, else output to the file specified
+	if (cardNumbers.empty()) {help(); return;}
 	if (outputFileName.empty()){	
 		for (int i = 0; i != cardNumbers.size(); ++i){
 			std::cout << cardNumbers[i] << std::endl;
@@ -137,11 +138,11 @@ std::string issuerId(const std::string& input){
 	if(digits[0] == '3' && digits[1] == '1')
 		return "China T-Union";
        	if(digits[0] == '6' && digits[1] == '2')
-	   return "China UnionPay";	
+		return "China UnionPay";	
 	if(digits[0] == '3' && digits[1] == '4' || digits[0] == '3' && digits[1] == '7')
-	   return "American Express";
+		return "American Express";
 	if(digits[0] == '3' && digits[1] == '6')
-	   return "Diners Club International";
+		return "Diners Club International";
 	if(digits[0] == '5' && (digits[1] == '1' || digits[1] == '2' || digits[1] == '3' || digits[1] == '4' || digits[1] == '5' ))
 		return "Mastercard";
 	if(digits == "6011" || (digits[0] == '6' && digits[1] == '5'))
